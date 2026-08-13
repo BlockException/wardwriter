@@ -34,12 +34,12 @@ export default function Impressum() {
         <section>
           <h2>Haftung &amp; Urheberrecht</h2>
           <p>
-            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Für externe Links zu fremden Inhalten übernehmen wir keine Haftung; hierfür sind ausschließlich deren Betreiber verantwortlich.<br/><br/>
-            Die durch uns erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            WardWriter ist ein Programm, das lokal auf Ihrem Windows- oder Linux-Gerät installiert und ausgeführt wird; es wird von uns nicht auf einem eigenen Server betrieben oder gehostet. Als Anbieter sind wir gemäß § 7 Abs. 1 DDG für die von uns bereitgestellten Inhalte des Programms nach den allgemeinen Gesetzen verantwortlich.<br/><br/>
+            Die durch uns erstellten Inhalte und das Programm selbst unterliegen dem deutschen Urheberrecht.
           </p>
         </section>
 
-        <p className="legal-date">Stand: 28.07.2026</p>
+        <p className="legal-date">Stand: 13.08.2026</p>
       </div>
     </div>
   );

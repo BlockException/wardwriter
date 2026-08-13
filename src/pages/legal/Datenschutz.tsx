@@ -15,9 +15,12 @@ export default function Datenschutz() {
         </h1>
 
         <section>
-          <h2>1. Verantwortliche Stelle</h2>
+          <h2>1. Allgemeines</h2>
           <p>
-            Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br/><br/>
+            WardWriter ist ein Programm, das lokal auf Ihrem Windows- oder Linux-Gerät installiert wird und dort ausgeführt wird. Es gibt keine Server, auf denen die Anwendung läuft oder gehostet wird, und die Nutzung des Programms erfordert keine Internetverbindung. Es findet daher zu keinem Zeitpunkt eine Übermittlung Ihrer Daten an uns oder Dritte statt.
+          </p>
+          <p>
+            Verantwortlich im Sinne der DSGVO wäre, sollte doch personenbezogene Daten verarbeitet werden (z.B. bei einer freiwilligen Kontaktaufnahme, siehe unten):<br/><br/>
             Fabian Haugg<br/>
             Bahnhofsstraße 7<br/>
             86368 Gersthofen<br/><br/>
@@ -26,42 +29,45 @@ export default function Datenschutz() {
         </section>
 
         <section>
-          <h2>2. Datenerfassung auf dieser Website</h2>
+          <h2>2. Datenverarbeitung durch das Programm</h2>
 
-          <h3>Server-Log-Dateien &amp; Hosting</h3>
+          <h3>Keine Datenübertragung</h3>
           <p>
-            Diese Website wird gehostet bei aitch.systems. Der Provider unserer Website erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (z.B. IP-Adresse, Browsertyp, Uhrzeit der Anfrage). Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der sicheren Bereitstellung unserer Website.
-          </p>
-
-          <h3>Kontaktaufnahme per E-Mail</h3>
-          <p>
-            Wenn Sie uns per E-Mail kontaktieren, wird Ihre E-Mail inklusive aller darin enthaltenen personenbezogenen Daten zum Zwecke der Bearbeitung Ihres Anliegens gespeichert (Art. 6 Abs. 1 lit. f DSGVO). Diese Daten geben wir nicht ohne Ihre Einwilligung weiter und löschen sie, sobald der Zweck entfällt.
+            WardWriter baut zu keinem Zeitpunkt eine Verbindung zu einem Server auf. Es werden keine Nutzungsdaten, Statistiken oder sonstige personenbezogene Daten erhoben, gespeichert oder an uns übermittelt. Es existieren weder Server-Logs noch ein Hosting-Anbieter, der im Rahmen der Programmnutzung Daten von Ihnen verarbeitet.
           </p>
 
           <h3>Cookies und Tracking</h3>
           <p>
-            Wir setzen auf dieser Website <strong>keine</strong> Cookies, keine Analyse-Tools und keine Tracking-Software ein.
+            Das Programm verwendet <strong>keine</strong> Cookies, keine Analyse-Tools und keine Tracking-Software.
           </p>
 
-          <h3>LocalStorage</h3>
+          <h3>Lokale Speicherung auf Ihrem Gerät</h3>
           <p>
-            Wir verwenden den LocalStorage Ihres Browsers, um Ihre Design-Einstellung (Theme) und Ihre Schreibtrainer-Statistiken (z.B. beste Zeiten, WPM-Historie) zu speichern. Dabei werden keine personenbezogenen Daten gespeichert. Die Speicherung erfolgt ausschließlich auf Ihrem Gerät und wird nicht an uns oder Dritte übermittelt.
+            WardWriter speichert Ihre Design-Einstellung (Theme) und Ihre Schreibtrainer-Statistiken (z.B. beste Zeiten, WPM-Historie) ausschließlich lokal auf Ihrem eigenen Windows- oder Linux-Gerät. Dabei werden keine personenbezogenen Daten verarbeitet, und diese Daten verlassen zu keinem Zeitpunkt Ihr Gerät.
+          </p>
+          <p>
+            Diese Daten verbleiben so lange gespeichert, bis Sie sie selbst löschen – etwa über die Reset-Funktion auf der Statistik-Seite innerhalb des Programms oder durch Deinstallation der Anwendung.
           </p>
 
-          <h3>Schriftarten (Webfonts)</h3>
+          <h3>Schriftarten</h3>
           <p>
-            Wir nutzen die Schriftarten "Inter" und "JetBrains Mono" zur Darstellung von Text auf unserer Website. Diese Schriftarten sind lokal auf unserem eigenen Server gespeichert und werden direkt von uns ausgeliefert. Es findet zu keinem Zeitpunkt eine Verbindung zu Servern von Google oder einem anderen externen Anbieter statt.
+            Die verwendeten Schriftarten "Inter" und "JetBrains Mono" sind fest in das Programm eingebettet. Es findet zu keinem Zeitpunkt eine Verbindung zu Servern von Google oder einem anderen externen Anbieter statt.
+          </p>
+
+          <h3>Kontaktaufnahme per E-Mail</h3>
+          <p>
+            Sollten Sie uns freiwillig per E-Mail kontaktieren, wird Ihre E-Mail inklusive aller darin enthaltenen personenbezogenen Daten zum Zwecke der Bearbeitung Ihres Anliegens gespeichert (Art. 6 Abs. 1 lit. f DSGVO). Diese Daten geben wir nicht ohne Ihre Einwilligung weiter und löschen sie, sobald der Zweck entfällt.
           </p>
         </section>
 
         <section>
           <h2>3. Ihre Rechte</h2>
           <p>
-            Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Hierzu können Sie sich jederzeit unter der oben angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei einer zuständigen Aufsichtsbehörde zu.
+            Soweit im Einzelfall personenbezogene Daten verarbeitet werden (etwa bei einer E-Mail-Kontaktaufnahme), haben Sie jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten Daten, deren Herkunft und den Zweck der Verarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser Daten. Hierzu können Sie sich jederzeit unter der oben angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei einer zuständigen Aufsichtsbehörde zu.
           </p>
         </section>
 
-        <p className="legal-date">Stand: 28.07.2026</p>
+        <p className="legal-date">Stand: 13.08.2026</p>
       </div>
     </div>
   );
