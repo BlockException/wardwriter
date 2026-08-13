@@ -12,9 +12,9 @@ dist
 dist-ssr
 *.local
 
-# Tauri (Rust build output / generated schemas)
+# Tauri (Rust build output / generated mobile projects)
 src-tauri/target/
-src-tauri/gen/schemas/
+src-tauri/gen/
 
 # Editor directories and files
 .vscode/*

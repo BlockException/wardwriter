@@ -7,6 +7,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   release:
     strategy:
@@ -15,11 +18,11 @@ jobs:
         include:
           - platform: 'windows-latest'
             args: ''
-          # To enable macOS/Linux builds later, uncomment the entries below.
+          - platform: 'ubuntu-22.04'
+            args: ''
+          # To enable macOS builds later, uncomment the entry below.
           # - platform: 'macos-latest'
           #   args: '--target universal-apple-darwin'
-          # - platform: 'ubuntu-22.04'
-          #   args: ''
 
     runs-on: ${{ matrix.platform }}
 
@@ -66,3 +69,58 @@ jobs:
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+
+  android:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK
+        run: |
+          sdkmanager --install "ndk;27.0.12077973"
+          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> "$GITHUB_ENV"
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+
+      - name: Install Rust build cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Initialize Android project
+        run: npx tauri android init --ci
+
+      - name: Build Android APKs
+        run: npx tauri android build --apk --split-per-abi --ci --target aarch64 armv7 x86_64
+
+      - name: Upload APKs to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          draft: true
+          files: src-tauri/gen/android/app/build/outputs/apk/**/release/*.apk
