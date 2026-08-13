@@ -68,7 +68,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
+Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Pro Tag entstehen dabei genau zwei Windows- (`.msi` + `.exe`) und zwei Linux-Artefakte (`.deb` + `.AppImage`) sowie eine Android-APK. Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
 
 Die Release-Artefakte sind einheitlich benannt (`wardwriter_<platform>_<arch>[_setup].<ext>`), z.B.:
 
@@ -103,20 +103,20 @@ WardWriter kann zusätzlich als Android-APK gebaut werden (`src-tauri/gen/androi
 ```bash
 npm install
 npx tauri android init   # einmalig, generiert src-tauri/gen/android
-npx tauri android build --apk --split-per-abi
+npx tauri android build --apk --debug
 ```
 
-Die fertigen APKs (eine pro CPU-Architektur, z.B. `arm64-v8a` für die meisten aktuellen Geräte) liegen danach unter:
+Die fertige, universelle APK (alle CPU-Architekturen in einer Datei) liegt danach unter:
 
 ```
-src-tauri/gen/android/app/build/outputs/apk/**/release/*.apk
+src-tauri/gen/android/app/build/outputs/apk/universal/debug/*.apk
 ```
 
-> **Hinweis:** Ohne hinterlegten Release-Keystore signiert Tauri die APK automatisch mit einem Debug-Zertifikat. Das reicht zum Sideloaden/Testen, nicht aber für eine Veröffentlichung im Play Store – dafür wird ein eigener Signing-Keystore benötigt.
+> **Hinweis:** Ohne hinterlegten Release-Keystore signiert Tauri unsignierte Release-APKs nicht – Android verweigert deren Installation dann mit "Paket wurde nicht installiert" bzw. "ungültiges Paket". Deshalb wird hier bewusst die `--debug`-Variante gebaut, die automatisch mit dem Android-Debug-Keystore signiert wird und sich problemlos installieren lässt. Für eine Play-Store-Veröffentlichung wird stattdessen ein eigener Release-Signing-Keystore benötigt.
 
 ### Automatischer Android-Release über GitHub Actions
 
-Der zusätzliche Job `android` in [`.github/workflows/release.yml`](.github/workflows/release.yml) baut bei jedem Tag-Push automatisch die APKs (Android SDK/NDK/Java-Setup inklusive), benennt sie einheitlich um (`wardwriter_android_<abi>.apk`, z.B. `wardwriter_android_arm64-v8a.apk`) und hängt sie als weitere Artefakte an dasselbe GitHub Release an.
+Der zusätzliche Job `android` in [`.github/workflows/release.yml`](.github/workflows/release.yml) baut bei jedem Tag-Push automatisch eine einzelne, universelle APK (Android SDK/NDK/Java-Setup inklusive), benennt sie einheitlich zu `wardwriter_android.apk` um und hängt sie als weiteres Artefakt an dasselbe GitHub Release an.
 
 ## Lizenz
 

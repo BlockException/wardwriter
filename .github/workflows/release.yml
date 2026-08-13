@@ -16,10 +16,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # --bundles pinned explicitly so each platform always produces exactly
+          # two installers (Windows: msi+nsis, Linux: deb+appimage), independent
+          # of whether optional tools like rpmbuild are present on the runner.
           - platform: 'windows-latest'
-            args: ''
+            args: '--bundles msi,nsis'
           - platform: 'ubuntu-22.04'
-            args: ''
+            args: '--bundles deb,appimage'
           # To enable macOS builds later, uncomment the entry below.
           # - platform: 'macos-latest'
           #   args: '--target universal-apple-darwin'
@@ -116,18 +119,20 @@ jobs:
       - name: Initialize Android project
         run: npx tauri android init --ci
 
-      - name: Build Android APKs
-        run: npx tauri android build --apk --split-per-abi --ci --target aarch64 armv7 x86_64
+      - name: Build Android APK
+        # --debug: Tauri release APKs are unsigned by default without a keystore,
+        # which Android refuses to install ("package appears to be invalid").
+        # The debug variant is auto-signed by the Android Gradle Plugin's debug
+        # keystore, producing a single installable universal APK.
+        run: npx tauri android build --apk --debug --ci --target aarch64 armv7 x86_64
 
-      - name: Rename APKs for release
+      - name: Rename APK for release
         run: |
           mkdir -p dist-apk
-          find src-tauri/gen/android/app/build/outputs/apk -name '*.apk' -path '*release*' | while read -r f; do
-            arch=$(basename "$(dirname "$f")")
-            cp "$f" "dist-apk/wardwriter_android_${arch}.apk"
-          done
+          apk=$(find src-tauri/gen/android/app/build/outputs/apk -name '*.apk' -path '*debug*' | head -n 1)
+          cp "$apk" dist-apk/wardwriter_android.apk
 
-      - name: Upload APKs to GitHub Release
+      - name: Upload APK to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
