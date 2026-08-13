@@ -1,0 +1,73 @@
+.wordDisplay {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    line-height: 2.2;
+    height: 140px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    position: relative;
+    scroll-behavior: smooth;
+    backdrop-filter: blur(8px);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.wordDisplay:focus-within,
+.wordDisplay:hover {
+    border-color: rgba(37, 99, 235, 0.15);
+    box-shadow: var(--shadow-md), 0 0 40px rgba(37, 99, 235, 0.05);
+}
+
+.wordDisplay::-webkit-scrollbar {
+    display: none;
+}
+.wordDisplay {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.word {
+    color: #3e4a63;
+    position: relative;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+.currentWord {
+    background-color: var(--accent-subtle);
+    color: var(--text-primary);
+}
+
+.correctWord {
+    color: var(--success-color);
+}
+
+.incorrectWord {
+    color: var(--error-color);
+}
+
+.char {
+    position: relative;
+    transition: color 0.1s ease;
+}
+
+.correctChar {
+    color: var(--success-color);
+}
+
+.incorrectChar {
+    color: var(--error-color);
+}
+
+.extraChar {
+    opacity: 0.6;
+}

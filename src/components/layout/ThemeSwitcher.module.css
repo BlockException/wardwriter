@@ -1,0 +1,101 @@
+.themeDropdown {
+    position: relative;
+}
+
+.themeMenu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--bg-card-solid);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+    min-width: 160px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+    z-index: 1200;
+}
+
+.themeMenu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.themeOption {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: left;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-main);
+}
+
+.themeOption:hover:not(.locked) {
+    background: var(--accent-subtle);
+    color: var(--text-primary);
+}
+
+.themeOption.active {
+    background: var(--accent-glow);
+}
+
+.themeOption[data-theme="midnight"] {
+    color: #2563eb;
+}
+
+.themeOption[data-theme="summer"] {
+    color: #f59e0b;
+}
+
+.themeOption[data-theme="rubin"] {
+    color: #e11d48;
+}
+
+.themeOption[data-theme="aurora"] {
+    color: #8b5cf6;
+}
+
+.themeOption[data-theme="augsburg"] {
+    color: #009e49;
+}
+
+.themeOption.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-muted) !important;
+}
+
+.themeOption.locked svg {
+    color: var(--text-muted);
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.iconBtn:hover {
+    background: var(--glass);
+    color: var(--text-primary);
+}

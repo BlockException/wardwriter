@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WardWriter – Schreibtrainer</title>
+    <meta name="description" content="WardWriter – Dein offizieller Schreibtrainer. Verbessere deine Tippgeschwindigkeit mit deutschen Wörtern.">
+    <link rel="icon" type="image/webp" href="/logo.webp">
+    
+    <script>
+      let savedTheme = localStorage.getItem('wardwriter-theme') || 'midnight';
+      if (savedTheme === 'cyber' || savedTheme === 'coding') {
+          savedTheme = 'midnight';
+          localStorage.setItem('wardwriter-theme', savedTheme);
+      }
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

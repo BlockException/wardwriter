@@ -1,0 +1,61 @@
+.inputContainer {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.wordInput {
+    flex: 1;
+    background: var(--bg-card-solid);
+    border: 2px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    transition: all var(--transition-normal);
+    outline: none;
+    min-height: 52px;
+    caret-color: var(--accent);
+}
+
+.wordInput::placeholder {
+    color: var(--text-muted);
+}
+
+.wordInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.restartBtn {
+    background: var(--bg-card-solid);
+    border: 2px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    min-width: 52px;
+}
+
+.restartBtn:hover {
+    color: var(--accent);
+    border-color: rgba(37, 99, 235, 0.4);
+    background: var(--accent-subtle);
+}
+
+.statsContainer {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    position: relative;
+}

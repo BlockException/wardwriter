@@ -1,0 +1,136 @@
+.slideMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    max-width: 85vw;
+    height: 100vh;
+    background: var(--bg-card-solid);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid var(--glass-border);
+    z-index: 1060;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--nav-height);
+    overflow-y: auto;
+}
+
+.slideMenu.active {
+    transform: translateX(0);
+}
+
+.menuSection {
+    padding: 0.5rem 0;
+}
+
+.menuSection + .menuSection {
+    border-top: 1px solid var(--glass-border);
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-main);
+}
+
+.menuItem:hover {
+    color: var(--text-primary);
+    background: var(--accent-subtle);
+}
+
+.activePage {
+    color: var(--accent);
+    background: var(--accent-subtle);
+}
+
+.menuItem svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.menuItem:hover svg {
+    opacity: 1;
+}
+
+.menuCategory {
+    justify-content: flex-start;
+    position: relative;
+}
+
+.menuCategory::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--text-muted);
+    border-bottom: 1.5px solid var(--text-muted);
+    transform: rotate(45deg);
+    transition: transform var(--transition-fast);
+    margin-left: auto;
+}
+
+.menuCategory.expanded::after {
+    transform: rotate(-135deg);
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.submenu.expanded {
+    max-height: 300px;
+}
+
+.submenu .menuItem {
+    padding-left: 3rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.submenu .menuItem:hover {
+    color: var(--text-primary);
+}
+
+.submenu .menuItem.selected {
+    color: var(--accent);
+}
+
+.submenu .menuItem svg {
+    width: 15px;
+    height: 15px;
+}
+
+.menuOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.menuOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
