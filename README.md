@@ -68,7 +68,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Pro Tag entstehen dabei genau zwei Windows- (`.msi` + `.exe`) und zwei Linux-Artefakte (`.deb` + `.AppImage`) sowie eine Android-APK. Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
+Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Pro Tag entstehen dabei genau zwei Windows- (`.msi` + `.exe`) und zwei Linux-Artefakte (`.deb` + `.AppImage`). Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
 
 Die Release-Artefakte sind einheitlich benannt (`wardwriter_<platform>_<arch>[_setup].<ext>`), z.B.:
 
@@ -81,42 +81,12 @@ wardwriter_linux_x86_64.deb        # Linux Debian-Paket
 
 ### App-Icon
 
-Das App-Icon wird aus `public/logo.webp` abgeleitet. Da die Quelldatei nur 128×128 Pixel groß ist, wird sie vor der Icon-Erzeugung hochskaliert (wichtig für scharfe Android-Icons in allen Dichte-Stufen bis `xxxhdpi`/432×432). Um das Icon nach einer Änderung des Logos neu zu erzeugen:
+Das App-Icon wird aus `public/logo.webp` abgeleitet. Da die Quelldatei nur 128×128 Pixel groß ist, wird sie vor der Icon-Erzeugung hochskaliert. Um das Icon nach einer Änderung des Logos neu zu erzeugen:
 
 ```bash
 node -e "require('sharp')('public/logo.webp').resize(1024,1024,{kernel:'lanczos3'}).png().toFile('src-tauri/app-icon-source.png')"
 npx tauri icon src-tauri/app-icon-source.png -o src-tauri/icons
 ```
-
-## Android-App (APK via Tauri)
-
-WardWriter kann zusätzlich als Android-APK gebaut werden (`src-tauri/gen/android`, wird bei Bedarf generiert und ist nicht Teil des Repos).
-
-### Voraussetzungen für einen lokalen Android-Build
-
-- Android SDK (`ANDROID_HOME`) sowie Android NDK (`NDK_HOME`)
-- JDK 17 (z.B. [Temurin](https://adoptium.net/))
-- Rust-Targets: `rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android`
-
-### Lokal eine APK bauen
-
-```bash
-npm install
-npx tauri android init   # einmalig, generiert src-tauri/gen/android
-npx tauri android build --apk --debug
-```
-
-Die fertige, universelle APK (alle CPU-Architekturen in einer Datei) liegt danach unter:
-
-```
-src-tauri/gen/android/app/build/outputs/apk/universal/debug/*.apk
-```
-
-> **Hinweis:** Ohne hinterlegten Release-Keystore signiert Tauri unsignierte Release-APKs nicht – Android verweigert deren Installation dann mit "Paket wurde nicht installiert" bzw. "ungültiges Paket". Deshalb wird hier bewusst die `--debug`-Variante gebaut, die automatisch mit dem Android-Debug-Keystore signiert wird und sich problemlos installieren lässt. Für eine Play-Store-Veröffentlichung wird stattdessen ein eigener Release-Signing-Keystore benötigt.
-
-### Automatischer Android-Release über GitHub Actions
-
-Der zusätzliche Job `android` in [`.github/workflows/release.yml`](.github/workflows/release.yml) baut bei jedem Tag-Push automatisch eine einzelne, universelle APK (Android SDK/NDK/Java-Setup inklusive), benennt sie einheitlich zu `wardwriter_android.apk` um und hängt sie als weiteres Artefakt an dasselbe GitHub Release an.
 
 ## Lizenz
 
