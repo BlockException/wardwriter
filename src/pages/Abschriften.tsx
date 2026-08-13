@@ -29,7 +29,8 @@ export default function Abschriften() {
 
   const words = useMemo(() => {
     if (!currentArticle) return [];
-    return currentArticle.text.split(' ');
+    // Collapse any stray newlines/whitespace so words never glue together (e.g. "satz.Nächster").
+    return currentArticle.text.replace(/\s+/g, ' ').trim().split(' ');
   }, [currentArticle]);
 
   if (!currentArticle) {
