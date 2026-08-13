@@ -68,6 +68,7 @@ jobs:
           releaseBody: 'Automatischer Release der WardWriter Desktop-App.'
           releaseDraft: true
           prerelease: false
+          releaseAssetNamePattern: 'wardwriter_[platform]_[arch][_setup].[ext]'
           args: ${{ matrix.args }}
 
   android:
@@ -118,9 +119,17 @@ jobs:
       - name: Build Android APKs
         run: npx tauri android build --apk --split-per-abi --ci --target aarch64 armv7 x86_64
 
+      - name: Rename APKs for release
+        run: |
+          mkdir -p dist-apk
+          find src-tauri/gen/android/app/build/outputs/apk -name '*.apk' -path '*release*' | while read -r f; do
+            arch=$(basename "$(dirname "$f")")
+            cp "$f" "dist-apk/wardwriter_android_${arch}.apk"
+          done
+
       - name: Upload APKs to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           draft: true
-          files: src-tauri/gen/android/app/build/outputs/apk/**/release/*.apk
+          files: dist-apk/*.apk

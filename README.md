@@ -68,7 +68,16 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer (`.exe`/`.msi`/`.AppImage`/`.deb`) als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
+Der Workflow führt dabei `npm install`, `npm run build` und anschließend `tauri build` für Windows und Linux aus (als Matrix-Build) und hängt die entstandenen Installer als Artefakte an ein (als Entwurf angelegtes) GitHub Release an. Ein auskommentierter macOS-Matrix-Eintrag (`.dmg`) liegt bereits bereit und kann bei Bedarf einfach aktiviert werden.
+
+Die Release-Artefakte sind einheitlich benannt (`wardwriter_<platform>_<arch>[_setup].<ext>`), z.B.:
+
+```
+wardwriter_windows_x64_setup.exe   # Windows NSIS-Installer
+wardwriter_windows_x64.msi         # Windows MSI-Installer
+wardwriter_linux_x86_64.AppImage   # Linux AppImage
+wardwriter_linux_x86_64.deb        # Linux Debian-Paket
+```
 
 ### App-Icon
 
@@ -107,7 +116,7 @@ src-tauri/gen/android/app/build/outputs/apk/**/release/*.apk
 
 ### Automatischer Android-Release über GitHub Actions
 
-Der zusätzliche Job `android` in [`.github/workflows/release.yml`](.github/workflows/release.yml) baut bei jedem Tag-Push automatisch die APKs (Android SDK/NDK/Java-Setup inklusive) und hängt sie als weitere Artefakte an dasselbe GitHub Release an.
+Der zusätzliche Job `android` in [`.github/workflows/release.yml`](.github/workflows/release.yml) baut bei jedem Tag-Push automatisch die APKs (Android SDK/NDK/Java-Setup inklusive), benennt sie einheitlich um (`wardwriter_android_<abi>.apk`, z.B. `wardwriter_android_arm64-v8a.apk`) und hängt sie als weitere Artefakte an dasselbe GitHub Release an.
 
 ## Lizenz
 
